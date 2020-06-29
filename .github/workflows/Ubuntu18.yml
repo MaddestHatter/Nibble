@@ -25,7 +25,7 @@ jobs:
       id: Build
       run: |
         BOOST_ROOT=
-        apt-get purge '*boost*'
+        apt-get purge -y '*boost*'
         apt install -y libboost-all-dev
         build_folder="build/debug"
         nbxc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
