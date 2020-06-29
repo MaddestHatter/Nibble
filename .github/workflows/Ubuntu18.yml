@@ -25,8 +25,8 @@ jobs:
       id: Build
       run: |
         BOOST_ROOT=
-        sudo apt-get purge '*boost*'
-        sudo apt install -y libboost-all-dev
+        apt-get purge '*boost*'
+        apt install -y libboost-all-dev
         build_folder="build/debug"
         nbxc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
         nbxc_ver_folder=$(echo $ccx_ver | sed 's/\.//g')
