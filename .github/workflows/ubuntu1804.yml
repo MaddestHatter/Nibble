@@ -8,7 +8,7 @@ on:
 jobs:
   build-ubuntu16:
     name: Ubuntu 18.04
-    runs-on: self-hosted
+    runs-on: UbuntuBionic
     steps:
       - uses: actions/checkout@master
 
