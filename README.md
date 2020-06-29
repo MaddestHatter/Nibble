@@ -22,7 +22,8 @@ Giving our users the best from both worlds, a simple to use platform, messaging 
 - Discord: https://discordapp.com/invite/rqYhADW
 - Twitter: https://twitter.com/NibbleNetwork
 - Bitcoin Talk: 
-
+## Build Status
+![Ubuntu 18.04](https://github.com/MaddestHatter/Nibble/workflows/Ubuntu%2018.04/badge.svg)
 
 ## Compiling Nibble from source
 
