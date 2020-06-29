@@ -21,7 +21,7 @@ jobs:
           build_folder="build/debug"
           nbxc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
           nbxc_ver_folder=$(echo $ccx_ver | sed 's/\.//g')
-          release_name=nbxc-cli-ubuntu-1604-v"$nbxc_ver"
+          release_name=nbxc-cli-ubuntu-1804-v"$nbxc_ver"
           mkdir -p "$build_folder"
           cd "$build_folder"
           cmake ../..
