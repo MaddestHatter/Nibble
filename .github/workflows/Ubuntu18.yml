@@ -29,9 +29,11 @@ jobs:
         apt install -y libboost-all-dev
         build_folder="build/debug"
         nbxc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
-        echo "$GITHUB_REF=" + $GITHUB_REF
+        echo "NBXCVersion : " $nbxc_ver
         nbxc_ver_folder=$(echo $nbxc_ver | sed 's/\.//g')
+        echo "NBXC_Ver_Folder : " $nbxc_ver_folder
         release_name=nbxc-cli-ubuntu-v"$nbxc_ver"
+        echo "Release Name : " $release_name
         mkdir -p "$build_folder"
         cd "$build_folder"
         cmake ../..
