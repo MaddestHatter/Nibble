@@ -61,6 +61,6 @@ jobs:
         name: Nibble Core CLI v${{ steps.build.outputs.nbxc_ver }}
         body: |
           **${{ steps.build.outputs.release_name }}**
-          ${{ steps.build.outputs.sha256 }
+          ${{ steps.build.outputs.sha256 }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
