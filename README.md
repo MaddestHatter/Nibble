@@ -1,5 +1,5 @@
 # Nibble Core (CLI)
-Latest Release: v4.0.0
+Latest Release: v4.2.1
 
 <p align="center">
 <img src= "https://i.imgur.com/oJFun3j.png">
@@ -23,7 +23,7 @@ Giving our users the best from both worlds, a simple to use platform, messaging 
 - Twitter: https://twitter.com/NibbleNetwork
 - Bitcoin Talk: 
 ## Build Status
-![Ubuntu 18.04](https://github.com/MaddestHatter/Nibble/workflows/Ubuntu%2018.04/badge.svg)
+![Ubuntu 18.04](https://github.com/MaddestHatter/Nibble/workflows/Ubuntu%2018.04/badge.svg?branch=v4.2.1)
 
 ## Compiling Nibble from source
 
