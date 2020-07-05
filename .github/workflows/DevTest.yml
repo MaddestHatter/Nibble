@@ -1,0 +1,66 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Ubuntu 18.04
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    tags: 
+      - '*'
+    branches: [ development ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job!
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@master
+
+    # Runs a set of commands using the runners shell
+    - name: Build Release Nibble Core Ubuntu 18.04
+      id: Build
+      run: |
+        BOOST_ROOT=
+        apt-get purge -y '*boost*'
+        apt install -y libboost-all-dev
+        build_folder="build/debug"
+        nbxc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
+        echo "NBXCVersion : " $nbxc_ver
+        nbxc_ver_folder=$(echo $nbxc_ver | sed 's/\.//g')
+        echo "NBXC_Ver_Folder : " $nbxc_ver_folder
+        release_name=nbxc-cli-ubuntu-"$nbxc_ver"
+        echo "Release Name : " $release_name
+        mkdir -p "$build_folder"
+        cd "$build_folder"
+        cmake ../..
+        make
+        mkdir -p "$release_name/$nbxc_ver_folder"
+        echo "Created :" "$release_name/$nbxc_ver_folder"
+        exeFiles=()
+        for f in src/*; do [[ -x $f && -f $f ]] && exeFiles+=( "$f" ); done
+        cp "${exeFiles[@]}" "$release_name/$nbxc_ver_folder"
+        cd "$release_name"
+        tar -czf "$release_name".tar.gz "$nbxc_ver_folder"
+        sha256=$(shasum -a 256 "$release_name".tar.gz | awk '{print toupper($1)}')
+        asset_path="./$build_folder/$release_name/$release_name.tar.gz"
+        echo "::set-output name=sha256::${sha256}"
+        echo "::set-output name=release_name::${release_name}.tar.gz"
+        echo "::set-output name=asset_path::${asset_path}"
+        echo "::set-output name=nbxc_ver::${nbxc_ver}"
+        
+#   - name: Create Release
+#      uses: softprops/action-gh-release@v1
+#      with:
+#        files: ${{ steps.build.outputs.asset_path }}
+#        name: Nibble Core CLI ${{ steps.build.outputs.nbxc_ver }}
+#        body: |
+#          **${{ steps.build.outputs.release_name }}**
+#          ${{ steps.build.outputs.sha256 }}
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
